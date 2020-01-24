@@ -570,7 +570,7 @@ export class NextScript extends Component<OriginProps> {
 
       return (
         <script
-          defer
+          async
           key={bundle.file}
           src={`${assetPrefix}/_next/${encodeURI(
             bundle.file
@@ -611,7 +611,7 @@ export class NextScript extends Component<OriginProps> {
             file
           )}${_devOnlyInvalidateCacheQueryString}`}
           nonce={this.props.nonce}
-          defer
+          async
           crossOrigin={this.props.crossOrigin || process.crossOrigin}
           {...modernProps}
         />
@@ -667,6 +667,8 @@ export class NextScript extends Component<OriginProps> {
 
     const { _devOnlyInvalidateCacheQueryString } = this.context
 
+    delete this.context._documentProps.__NEXT_DATA__.props;
+
     if (inAmpMode) {
       if (process.env.NODE_ENV === 'production') {
         return null
@@ -720,7 +722,7 @@ export class NextScript extends Component<OriginProps> {
 
     const pageScript = [
       <script
-        defer
+        async
         data-next-page={page}
         key={page}
         src={
@@ -734,7 +736,7 @@ export class NextScript extends Component<OriginProps> {
       />,
       process.env.__NEXT_MODERN_BUILD && (
         <script
-          defer
+          async
           data-next-page={page}
           key={`${page}-modern`}
           src={
@@ -753,7 +755,7 @@ export class NextScript extends Component<OriginProps> {
 
     const appScript = [
       <script
-        defer
+        async
         data-next-page="/_app"
         src={
           assetPrefix +
@@ -767,7 +769,7 @@ export class NextScript extends Component<OriginProps> {
       />,
       process.env.__NEXT_MODERN_BUILD && (
         <script
-          defer
+          async
           data-next-page="/_app"
           src={
             assetPrefix +
