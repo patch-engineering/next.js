@@ -666,6 +666,8 @@ export class NextScript extends Component<OriginProps> {
     } = this.context._documentProps
 
     const { _devOnlyInvalidateCacheQueryString } = this.context
+    
+    delete this.context._documentProps.__NEXT_DATA__.props;
 
     if (inAmpMode) {
       if (process.env.NODE_ENV === 'production') {
